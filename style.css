@@ -1,0 +1,19 @@
+.input {
+    display:flex;
+    justify-content: center;
+}
+.city{
+border-radius: 20px;
+border-style:hidden;
+margin: 4px;
+}
+
+.button{
+border-radius: 20px;
+border-style:hidden;
+margin: 4px;
+
+
+
+/*Allt här är till knappen och sökfältet */
+}

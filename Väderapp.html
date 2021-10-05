@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Väderapp</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Fonten -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div class="container my-5"> <!--Margin på Y-axeln alltså uppifrån och ner--> 
+    <div class="row d-flex justify-content-center text-white">
+      <div class="col-xs-7"> <!--xs-7 ändrar storleken på kortet. col-xs-7 används för att snabbt lägga en grid layout-->
+              <div id="wrapper-bg" class="card bg-image shadow-1-strong" 
+              style="background-image:url('cloudy.gif')"> <!-- wrappers för att göra det lite snyggare och centrerar grejerna-->
+              
+            <!--Main current data-->
+            <div class="card-header text-center border-0"> <!--border tar bort sträcket som blir i boarden-->
+              <p class="h2 mb-1" id="wrapper-name"></p> <!--Margin bottom 1 läggs till namnet och ger oss en något större stadstext-->
+              <p class="mb-1" id="wrapper-description"></p> <!--Margin bottom 1 läggs till description-->
+              <p class="display-1 mb-1" id="wrapper-temp"></p> <!--Display 1 ger oss en stor heading på antalet grader-->
+            </div>
+
+            <div class="input"> 
+              <input type="text" class="city" placeholder="Enter city here" ><!--Sätter upp textrutan för att söka stad-->
+              <input type="submit" value="&#128269" class="button"><!--Får fram knappen-->
+             
+            </div>                         
+            <div class="display">
+              <h1 class="name"></h1>
+              <p class="desc"></p>
+              <p class="temp"></p>
+            </div>
+            
+            <!--Hourly forecast-->
+            <div class="card-body boarder-top boarder-bottom text-center"> <!--"Kortets uppbyggnad" vart på sidan den befinner sig o vart texten ska va osv-->
+              <div class="row">
+                <div class="col-2">
+                  <strong class="d-block mb-2">Now</strong>
+                  <img id="wrapper-icon-hour-now" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour-now"></strong>
+
+                  <!-- Hittade denna för att göra en toggle collapse. Det hade varit snyggt! -->
+
+                  <!-- <p>
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      Link with href
+                    </a>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Button with data-bs-target
+                    </button>
+                  </p>
+                </div>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                    </div> -->
+
+                    <!--Kan va kul o ha!-->
+                  </div>
+
+                    <!--här är htmlen för uppbyggnaden av grader varje timme-->
+                <div class="col-2">
+                  <strong id="wrapper-time1"class="d-block mb-2"></strong>
+                  <img id="wrapper-icon-hour1" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour1"></strong>
+                </div>
+                <div class="col-2">
+                  <strong id="wrapper-time2"class="d-block mb-2"></strong>
+                  <img id="wrapper-icon-hour2" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour2"></strong>
+                </div>
+              
+                <div class="col-2">
+                  <strong id="wrapper-time3"class="d-block mb-2"></strong>
+                  <img id="wrapper-icon-hour3" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour3"></strong>                  
+                </div>
+              
+                <div class="col-2">
+                  <strong id="wrapper-time4"class="d-block mb-2"></strong>
+                  <img id="wrapper-icon-hour4" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour4"></strong>              
+                </div>
+              
+                <div class="col-2">
+                  <strong id="wrapper-time5"class="d-block mb-2"></strong>
+                  <img id="wrapper-icon-hour5" src="" alt="">
+                  <strong class="d-block" id="wrapper-hour5"></strong>                  
+                </div>
+              </div>
+            </div>
+ 
+            <!--Daily forecast-->
+            <!--Här gör vi samma men för dagar-->
+            <div class="card-body">
+            <div class="row">
+              <div class="col-md-6"> <!--md sätter grid class (när screenen är större är typ 750 px) taget från bootstrapen-->
+
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-today" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-today"> </span>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6" id="day1"> <!--Lägger till id här (på alla 5 dagar) så jag kan kalla på den i loopen sen-->
+              <strong>Day 1</strong>
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-day1" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-day1"> </span>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6" id="day2"> 
+              <strong>Day 2</strong>
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-day2" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-day2"> </span>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6" id="day3">
+              <strong>Day 3</strong>
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-day3" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-day3"> </span>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6" id="day4">
+              <strong>Day 4</strong>
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-day4" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-day4"> </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6" id="day5">
+              <strong>Day 5</strong>
+              </div>
+              <div class="col-md-2">
+              <img id="wrapper-icon-day5" src="" alt="">
+              </div>
+              <div class="col-md-4">
+                <span id="wrapper-forecast-temp-day5"> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="väderapp.js"></script> <!--Väderappens JS-->
+    <!-- Custom scripts -->
+    <script type="text/javascript">
+      </script>   
+    </body>
+</html>
